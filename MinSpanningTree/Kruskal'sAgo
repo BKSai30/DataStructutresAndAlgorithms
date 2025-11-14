@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int u, v, weight;
+} Edge;
+
+typedef struct {
+    int *parent, *rank, n;
+} DisjointSet;
+
+DisjointSet* createDisjointSet(int n) {
+    DisjointSet* ds = (DisjointSet*)malloc(sizeof(DisjointSet));
+    ds->n = n;
+    ds->parent = (int*)malloc(n * sizeof(int));
+    ds->rank = (int*)malloc(n * sizeof(int));
+    for (int i = 0; i < n; i++) {
+        ds->parent[i] = i;
+        ds->rank[i] = 0;
+    }
+    return ds;
+}
+
+int find(DisjointSet* ds, int u) {
+    if (ds->parent[u] != u)
+        ds->parent[u] = find(ds, ds->parent[u]);
+    return ds->parent[u];
+}
+// You are using GCC
+void unionSets(DisjointSet* ds, int u, int v) {
+    int root_u = find(ds, u);
+    int root_v = find(ds, v);
+    if (root_u != root_v) {
+        if (ds->rank[root_u] > ds->rank[root_v]) {
+            ds->parent[root_v] = root_u;
+        } else if (ds->rank[root_u] < ds->rank[root_v]) {
+            ds->parent[root_u] = root_v;
+        } else {
+            ds->parent[root_v] = root_u;
+            ds->rank[root_u]++;
+        }
+    }
+}
+
+int compareEdges(const void *a, const void *b) {
+    return ((Edge*)a)->weight - ((Edge*)b)->weight;
+}
+
+void kruskal(int n, Edge edges[], int e) {
+    DisjointSet* ds = createDisjointSet(n);
+    qsort(edges, e, sizeof(Edge), compareEdges);
+
+    for (int i = 0; i < e; i++) {
+        int u = edges[i].u, v = edges[i].v;
+        if (find(ds, u) != find(ds, v)) {
+            unionSets(ds, u, v);
+            printf("%d %d %d\n", u, v, edges[i].weight);
+        }
+    }
+
+    free(ds->parent);
+    free(ds->rank);
+    free(ds);
+}
+int main() {
+    int n, e;
+    scanf("%d", &n);
+    scanf("%d", &e);
+
+    Edge edges[e];
+    for (int i = 0; i < e; i++) {
+        scanf("%d %d %d", &edges[i].u, &edges[i].v, &edges[i].weight);
+    }
+
+    kruskal(n, edges, e);
+    return 0;
+}
