@@ -1,1 +1,0 @@
-    findPairs(head, T);
