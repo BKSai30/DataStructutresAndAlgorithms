@@ -1,49 +1,29 @@
 #include <iostream>
+
 using namespace std;
 
-/* void bubble(int *arr, int n)
+int findMax(int *arr, int n)
 {
+    int max = arr[0];
     for (int i = 0; i < n; i++)
     {
-        int swap = 0;
-        for (int j = 0; j < n - 1 - i; j++)
-        {
-            if (arr[j] > arr[j + 1])
-            {
-                int t = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = t;
-                swap = 1;
-            }
-        }
-        if (!swap)
-            break;
+        if (arr[i] > max)
+            max = arr[i];
     }
-} */
-
-void selection(int *arr, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        int min = i;
-        for (int j = i; j < n; j++)
-        {
-            if (arr[j] < arr[min])
-                min = j;
-        }
-        int t = arr[min];
-        arr[min] = arr[i];
-        arr[i] = t;
-    }
+    return max;
 }
-
-int main()
+int findMin(int *arr, int n)
 {
-    int n = 5;
-    int arr[] = {5, 2, 3, 1, 4};
-    selection(arr, n);
+    int max = arr[0];
     for (int i = 0; i < n; i++)
     {
-        cout << arr[i] << endl;
+        if (arr[i] < max)
+            max = arr[i];
     }
+    return max;
+}
+int kLargest(int *arr, k, n)
+{
+    r = n - k;
+    max =
 }
