@@ -65,8 +65,8 @@ void kLargest(int *arr, int low, int high, int index)
 
 int main()
 {
-    int n = 5;
+    int n = 6;
     int k = 3;
-    int arr[] = {4, 3, 76, 32, 1};
-    kLargest(arr, 0, 4, n - k);
+    int arr[] = {4, 3, 76, 32, 1, 6};
+    kLargest(arr, 0, 5, n - k);
 }
