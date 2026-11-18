@@ -4,6 +4,7 @@ Mbani-Greinert_2023.zip
 
 *.exe
 Practice
-Practice/learnAgain.exe
+Practice/*
 sorting/quickSort/quick.exe
 *.json
+AdvancedCompCoding/*

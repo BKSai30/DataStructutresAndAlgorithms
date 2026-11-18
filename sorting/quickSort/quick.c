@@ -5,7 +5,7 @@ void swap(int *arr, int i, int j)
     arr[i] = arr[j];
     arr[j] = t;
 }
-int partition(int *arr, int low, int up)
+/* int partition(int *arr, int low, int up)
 {
     int pivot = low + ((up - low) / 2);
     swap(arr, pivot, up);
@@ -31,7 +31,24 @@ int partition(int *arr, int low, int up)
     }
     swap(arr, i, pivot);
     return i;
+} */
+
+int partition(int *arr, int low, int high)
+{
+    int pivot = high;
+    int i = low;
+    for (int j = low; j < high; j++)
+    {
+        if (arr[j] <= arr[pivot])
+        {
+            swap(arr, i, j);
+            i++;
+        }
+    }
+    swap(arr, i, pivot);
+    return i;
 }
+
 void sort(int *arr, int low, int up)
 {
     if (low < up)
